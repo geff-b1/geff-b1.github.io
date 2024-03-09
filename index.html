@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Learning Generalizable Feature Fields for Mobile Manipulation">
+  <meta name="keywords" content="Generalizable NeRF, Mobile Manipulation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning Generalizable Feature Fields for Mobile Manipulation</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title"> Learning Generalizable Feature Fields for Mobile Manipulation</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+                <a href="https://rogerqi.github.io/" target="_blank">Ri-Zhao Qiu</a><sup>*1</sup>,</span>
+            <span class="author-block">
+                <a href="https://jeffreyyh.github.io/" target="_blank"> Yafei Hu</a><sup>*1, 2</sup>,</span>
+            <span class="author-block">
+                <a href="https://www.episodeyang.com/" target="_blank"> Ge Yang</a><sup>3, 4</sup>,
+            </span>
+            <span class="author-block">
+                <a href="https://oasisyang.github.io/" target="_blank"> Yang Fu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+                <a href="https://jianglongye.com/" target="_blank"> Jianglong Ye</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+                <a href="https://jitengmu.github.io/" target="_blank"> Jiteng Mu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="" target="_blank"> Yuchen Song</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+                <a href="https://rchalyang.github.io/" target="_blank"> Ruihan Yang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+                <a href="https://natanaso.github.io/" target="_blank">Nikolay Atanasov</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+                <a href="https://www.ri.cmu.edu/ri-faculty/sebastian-scherer/" target="_blank"> Sebastian Scherer</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+                <a href="https://xiaolonw.github.io/" target="_blank">Xiaolong Wang</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>UC San Diego,</span>
+            <span class="author-block"><sup>2</sup>Carnegie Mellon University, </span>
+            <span class="author-block"><sup>3</sup>MIT</span>
+            <span class="author-block"><sup>4</sup>Institute of AI and Fundamental Interactions</span>
+            <p style="margin-top: -0.25rem" />
+            <span class="author-block" style="font-size: 0.7em; font-style: italic;"><sup>*</sup>Indicates equal contribution</span>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<h2 class="title is-5", style="text-align: center;">TLDR: Real-time Generalizable Feature Fields enable Mobile Manipulation </h2>
+
+<!-- teaser video section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <!-- <h2 class="title is-3">Intro Video</h2> -->
+        <video controls autoplay muted loop style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+          <source src="./resources/webm_videos/geff_release_v5.webm" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          An open problem in mobile manipulation is how to
+          represent objects and scenes in a unified manner so that robots
+          can use it both for navigating in the environment and manipulating
+          objects. The latter requires capturing intricate geometry
+          while understanding fine-grained semantics, whereas the former
+          involves capturing the complexity inherited to an expansive
+          physical scale. In this work, we present GeFF (Generalizable
+          Feature Fields), a scene-level generalizable neural feature field
+          that acts as a unified representation for both navigation and
+          manipulation that performs in real-time. To do so, we treat
+          generative novel view synthesis as a pre-training task, and then
+          align the resulting rich scene priors with natural language via
+          CLIP feature distillation. We demonstrate the effectiveness of this
+          approach by deploying GeFF on a quadruped robot equipped
+          with a manipulator. We evaluate GeFF’s ability to generalize to
+          open-set objects as well as running time when performing
+          open-vocabulary mobile manipulation in dynamic scenes.
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+</section>
+
+<!-- feature field viz section -->
+
+<section, class="section">
+<div class="columns is-centered">
+  <div class="container">
+  <div class="column is-full-width">
+    <h2 class="title is-3", style="text-align: center;">Piloting Study: Generalizable NeRFs as a Pre-training Proxy</h2>
+    <tr>
+      <td>
+        <br>
+        <div class="columns is-centered has-text-centered">
+          <img src="./resources/scannet_piloting.jpg" style="width: 80.0%;"></img>
+        </div>
+      </td>
+    </tr>
+
+    <h2 class="title is-5", style="text-align: center;">Even without explicit semantic supervision, generalizable NeRFs implicitly acquire geometric and semantic priors (grouping similar structures),
+      which we further enhance in GeFF. Feature visualizations are done by PCA on rendered features on ScanNet.</h2>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- Method section -->
+
+<!-- <br> -->
+<section, class="section">
+<div class="columns is-centered">
+  <div class="container">
+  <div class="column is-full-width">
+    <h2 class="title is-3", style="text-align: center;">Method Overview</h2>
+    <tr>
+      <td>
+        <br>
+        <div class="columns is-centered has-text-centered">
+          <img src="./resources/method_overview.jpg" style="width: 80.0%;"></img>
+        </div>
+      </td>
+    </tr>
+
+    <h2 class="title is-5", style="text-align: center;">Pre-trained as a generalizable NeRF encoder, GeFF provides unified scene representations
+      from onboard RGB-D stream, offering both real-time geometry and
+      language-grounded semantics. Compared to LERF, GeFF runs 
+      in real-time without costly per-scene optimization.</h2>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section">
+  <h2 class="title is-3", style="text-align: center;">Open-vocabulary Mobile Manipulation</h2>
+
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="content is-5">
+          Building upon 2D vision foundation models, GeFF generalizes to diverse <b>real-world indoor and outdoor scenes and objects</b>.
+          <br>*Features fields visualization reflects real FPS on the mobile robot.</h2>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <h3 class="content is-5"></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="column">
+      <div class="content">
+        <div style="text-align: center;">
+          <iframe src="https://drive.google.com/file/d/1NhTIos3iN7H4oQWvwH_j9vu5is1k9ALC/preview" width="640" height="360" allow="autoplay"></iframe>
+        </div>
+      </div>
+    </div>
+    <h2 class="title is-5", style="text-align: center;">Collecting an empty blue bottle coffee cup and toss it in a recycling bin.</h2>
+  </div>
+
+  <div class="container">
+    <div class="column">
+      <div class="content">
+        <div style="text-align: center;">
+          <iframe src="https://drive.google.com/file/d/1yCpe2yH53u3Eky9dEIgN6hJ67Ye5kn2L/preview" width="640" height="360" allow="autoplay"></iframe>
+        </div>
+      </div>
+    </div>
+    <h2 class="title is-5", style="text-align: center;">Picking up a bottle in the woods.</h2>
+  </div>
+
+  <div class="container">
+    <div class="column">
+      <div class="content">
+        <div style="text-align: center;">
+          <iframe src="https://drive.google.com/file/d/1OeBMpfNfX5hjGTpNo8JmnsFC-h7HwDmn/preview" width="640" height="360" allow="autoplay"></iframe>
+        </div>
+      </div>
+    </div>
+    <h2 class="title is-5", style="text-align: center;">Cleaning food warps from the outdoor patio.</h2>
+  </div>
+
+  <div class="container">
+    <div class="column">
+      <div class="content">
+        <div style="text-align: center;">
+          <iframe src="https://drive.google.com/file/d/17ohDV9JJHuUh7g8Dfe7K9YiHVhVPnwjO/preview" width="640" height="360" allow="autoplay"></iframe>
+        </div>
+      </div>
+    </div>
+    <h2 class="title is-5", style="text-align: center;">Placing used packaging to trash bin in an office.</h2>
+  </div>
+
+  <div class="container">
+    <div class="column">
+      <div class="content">
+        <div style="text-align: center;">
+          <iframe src="https://drive.google.com/file/d/1f3V0KZoth_xXiKou4LClTR4hyvRvg3xZ/preview" width="640" height="360" allow="autoplay"></iframe>
+        </div>
+      </div>
+    </div>
+    <h2 class="title is-5", style="text-align: center;">Picking up a bottle of car glass cleaner from the trunk.</h2>
+  </div>
+
+  <div class="container">
+    <div class="column">
+      <div class="content">
+        <div style="text-align: center;">
+          <iframe src="https://drive.google.com/file/d/1eCjULjCuOZpedY-cZYvdwSDWiaSQnk6Y/preview" width="640" height="360" allow="autoplay"></iframe>
+        </div>
+      </div>
+    </div>
+    <h2 class="title is-5", style="text-align: center;">Recycling a plastic bottle in a university lounge.</h2>
+  </div>
+
+</section>
+
+<section class="section">
+  <h2 class="title is-3", style="text-align: center;">Case study: capabilities of GeFF</h2>
+
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="content is-5">
+          We study what GeFF representations can do on various applications, including classical problems such as
+          dynamic obstacle avoidance and narrow passage traversal, as well as more challenging tasks such as
+          <b>open-vocabulary semantic-aware planning</b> on our quadruped robot.
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <h3 class="content is-5"></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="column">
+      <div class="content">
+        <div style="text-align: center;">
+          <video width="900" height="255" controls autoplay muted loop style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+            <source src="./resources/webm_videos/lab_with_feats.webm" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="title is-5", style="text-align: center;">Dynamic Obstacle Avoidance</h2>
+    <h2 class="content is-5", style="text-align: center;">The robot avoids a person who walks into the path with feature fields updated in real time.</h2>
+  </div>
+
+  <div class="container">
+
+    <!-- video 5 -->
+    <div class="column">
+      <div class="content">
+        <div style="text-align: center;">
+          <video width="900" height="255" controls autoplay muted loop style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+            <source src="./resources/webm_videos/meeting_room_with_fpv_feats.webm" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <h2 class="title is-5", style="text-align: center;">Narrow Passage Traversal</h2>
+    <h2 class="content is-5", style="text-align: center;">The robot goes through a narrow doorway with geometric representations from GeFF.</h2>
+  </div>
+
+  <div class="container">
+    
+    <div class="column">
+      <div class="content">
+        <div style="text-align: center;">
+          <video width="900" height="255" controls autoplay muted loop style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+            <source src="./resources/webm_videos/geometry_planner_with_fpv_feats.webm" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="title is-5", style="text-align: center;">Geometry-only Path Planning</h2>
+    <h2 class="content is-5", style="text-align: center;">The robot takes the shortest path and step over the lawn to the target object.</h2>
+  </div>
+
+  <div class="container">
+
+    <div class="column">
+      <div class="content">
+        <div style="text-align: center;">
+          <video width="900" height="255" controls autoplay muted loop style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+            <source src="./resources/webm_videos/semantic_plan_with_fpv_feats.webm" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="title is-5", style="text-align: center;">Semantic-aware Path Planning</h2>
+    <h2 class="content is-5", style="text-align: center;">GeFF assigns higher affordances for lawn and keeps the robot on the walkway.</h2>
+
+  </div>
+
+</section>
+
+<!-- Bibtex section -->
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{anonymized,
+  author    = {anonymized},
+  title     = {Learning Generalizable Feature Fields for Mobile Manipulation},
+  booktitle = {},
+  year      = {2024},
+}</code></pre>
+  </div>
+</section>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <!-- <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p> -->
+          <p align="center" >
+          Page template from <a href="https://nerfies.github.io/"><span class="dnerf">Nerfies</span></a> 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
